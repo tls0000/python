@@ -1,0 +1,34 @@
+from tkinter import *
+from tkinter.filedialog import *
+from tkinter.simpledialog import *
+from wand.image import *
+
+#함수 선언 부분
+def displayImage():
+    pass
+def func_open() :
+    pass
+def func_save():
+    pass
+def func_exit():
+    pass
+def func_zoomin():
+    pass
+def func_zoomout() :
+    pass
+def func_mirror1():
+    pass
+def func_mirror2():
+    pass
+def func_rotate():
+    pass
+def func_bright():
+    pass
+def func_dark():
+    pass
+def func_clear() :
+    pass
+def func_unclear():
+    pass
+def func_bw() :
+    pass
