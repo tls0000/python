@@ -1,0 +1,11 @@
+def greet_user(name):
+    """사용자를 인사하는 함수."""
+    print(f"안녕하세요, {name}님! 반갑습니다.")
+
+def main():
+    """메인 함수."""
+    user_name = input("이름을 입력하세요: ")  # 사용자로부터 이름 입력 받기
+    greet_user(user_name)  # 인사 함수 호출
+
+if __name__ == "__main__":
+    main()  # 프로그램 시작
