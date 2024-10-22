@@ -1,0 +1,21 @@
+def recommend_movie():
+    print("영화 장르를 선택하세요:")
+    print("1. 액션")
+    print("2. 로맨스")
+    print("3. 코미디")
+    print("4. 드라마")
+    
+    choice = input("번호를 입력하세요 (1-4): ")
+    
+    if choice == '1':
+        print("추천 영화: 매드맥스: 분노의 도로, 다크 나이트")
+    elif choice == '2':
+        print("추천 영화: 노트북, 어바웃 타임")
+    elif choice == '3':
+        print("추천 영화: 굿모닝 에브리원, 투명인간")
+    elif choice == '4':
+        print("추천 영화: 포레스트 검프, 쇼생크 탈출")
+    else:
+        print("잘못된 선택입니다. 1-4 사이의 번호를 입력하세요.")
+
+recommend_movie()
