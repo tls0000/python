@@ -1,0 +1,25 @@
+# 간단한 퀴즈 프로그램
+
+# 퀴즈 질문과 정답
+quiz = {
+    "한국의 수도는?": "서울",
+    "파이썬(Python)은 어떤 종류의 언어인가?": "프로그래밍 언어",
+    "3 + 5는?": "8",
+}
+
+score = 0
+
+# 퀴즈 진행
+for question, correct_answer in quiz.items():
+    print(question)
+    answer = input("정답을 입력하세요: ")
+
+    # 정답 확인
+    if answer == correct_answer:
+        print("정답입니다!")
+        score += 1
+    else:
+        print(f"오답입니다. 정답은 {correct_answer}입니다.")
+
+# 최종 점수 출력
+print(f"\n퀴즈가 끝났습니다. 당신의 점수는 {len(quiz)}문제 중 {score}점입니다.")
