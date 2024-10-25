@@ -1,0 +1,16 @@
+def factorial(n):
+    # 0!은 1로 정의됩니다.
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+# 사용자로부터 입력 받기
+try:
+    num = int(input("팩토리얼을 계산할 숫자를 입력하세요: "))
+    if num < 0:
+        print("양의 정수를 입력하세요.")
+    else:
+        print(f"{num}! = {factorial(num)}")
+except ValueError:
+    print("숫자를 입력해 주세요.")
