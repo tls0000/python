@@ -1,0 +1,69 @@
+import tkinter as tk
+from tkinter import filedialog, messagebox
+
+# 메모장 클래스 정의
+class SimpleNotepad:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("간단한 메모장")
+        self.root.geometry("400x400")
+        
+        # 텍스트 입력 위젯 생성
+        self.text_area = tk.Text(root, wrap="word")
+        self.text_area.pack(expand=True, fill="both")
+        
+        # 메뉴 생성
+        self.create_menu()
+
+    def create_menu(self):
+        # 메뉴바 생성
+        menu_bar = tk.Menu(self.root)
+        
+        # 파일 메뉴 생성
+        file_menu = tk.Menu(menu_bar, tearoff=0)
+        file_menu.add_command(label="새 파일", command=self.new_file)
+        file_menu.add_command(label="열기", command=self.open_file)
+        file_menu.add_command(label="저장", command=self.save_file)
+        file_menu.add_separator()
+        file_menu.add_command(label="종료", command=self.root.quit)
+        
+        # 메뉴바에 파일 메뉴 추가
+        menu_bar.add_cascade(label="파일", menu=file_menu)
+        
+        # 메뉴바를 루트 윈도우에 설정
+        self.root.config(menu=menu_bar)
+    
+    def new_file(self):
+        # 텍스트 영역을 비워서 새 파일 생성
+        self.text_area.delete(1.0, tk.END)
+
+    def open_file(self):
+        # 파일 열기 다이얼로그 표시
+        file_path = filedialog.askopenfilename(filetypes=[("텍스트 파일", "*.txt"), ("모든 파일", "*.*")])
+        if file_path:
+            try:
+                # 파일 내용을 텍스트 영역에 표시
+                with open(file_path, "r", encoding="utf-8") as file:
+                    content = file.read()
+                    self.text_area.delete(1.0, tk.END)
+                    self.text_area.insert(tk.END, content)
+            except Exception as e:
+                messagebox.showerror("오류", f"파일을 열 수 없습니다: {e}")
+
+    def save_file(self):
+        # 파일 저장 다이얼로그 표시
+        file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("텍스트 파일", "*.txt"), ("모든 파일", "*.*")])
+        if file_path:
+            try:
+                # 텍스트 영역 내용을 파일에 저장
+                with open(file_path, "w", encoding="utf-8") as file:
+                    content = self.text_area.get(1.0, tk.END)
+                    file.write(content)
+                messagebox.showinfo("저장 완료", "파일이 성공적으로 저장되었습니다.")
+            except Exception as e:
+                messagebox.showerror("오류", f"파일을 저장할 수 없습니다: {e}")
+
+# tkinter 창 설정 및 메모장 실행
+root = tk.Tk()
+notepad = SimpleNotepad(root)
+root.mainloop()
