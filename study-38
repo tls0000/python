@@ -1,0 +1,14 @@
+# 평균을 계산하는 함수 정의
+def calculate_average(numbers):
+    if len(numbers) == 0:
+        return 0
+    return sum(numbers) / len(numbers)
+
+# 숫자 리스트 정의
+numbers = [10, 20, 30, 40, 50]
+
+# 평균 계산
+average = calculate_average(numbers)
+
+# 결과 출력
+print(f"리스트 {numbers}의 평균은 {average}입니다.")
