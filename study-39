@@ -1,0 +1,17 @@
+def is_palindrome(word):
+    # 입력받은 단어를 소문자로 변환하고, 앞뒤가 같은지 비교
+    word = word.lower()
+    return word == word[::-1]
+
+def main():
+    print("회문 검사 프로그램입니다.")
+    word = input("검사할 단어를 입력하세요: ")
+    
+    if is_palindrome(word):
+        print(f"'{word}'는 회문입니다.")
+    else:
+        print(f"'{word}'는 회문이 아닙니다.")
+
+# 프로그램 실행
+if __name__ == "__main__":
+    main()
