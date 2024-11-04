@@ -1,0 +1,57 @@
+# 간단한 할 일 목록 프로그램
+
+# 할 일 목록을 저장할 리스트
+todo_list = []
+
+def display_menu():
+    print("\n=== 할 일 목록 ===")
+    print("1. 할 일 추가")
+    print("2. 할 일 목록 보기")
+    print("3. 할 일 삭제")
+    print("4. 종료")
+    print("==================")
+
+def add_task():
+    task = input("추가할 할 일을 입력하세요: ")
+    todo_list.append(task)
+    print(f"'{task}'가 목록에 추가되었습니다.")
+
+def view_tasks():
+    if not todo_list:
+        print("현재 할 일이 없습니다.")
+    else:
+        print("\n할 일 목록:")
+        for index, task in enumerate(todo_list, 1):
+            print(f"{index}. {task}")
+
+def delete_task():
+    view_tasks()
+    try:
+        task_number = int(input("삭제할 할 일 번호를 입력하세요: "))
+        if 1 <= task_number <= len(todo_list):
+            removed_task = todo_list.pop(task_number - 1)
+            print(f"'{removed_task}'가 목록에서 삭제되었습니다.")
+        else:
+            print("유효한 번호를 입력하세요.")
+    except ValueError:
+        print("번호를 입력하세요.")
+
+def main():
+    while True:
+        display_menu()
+        choice = input("원하는 작업을 선택하세요 (1-4): ")
+
+        if choice == '1':
+            add_task()
+        elif choice == '2':
+            view_tasks()
+        elif choice == '3':
+            delete_task()
+        elif choice == '4':
+            print("프로그램을 종료합니다.")
+            break
+        else:
+            print("잘못된 입력입니다. 다시 선택하세요.")
+
+if __name__ == "__main__":
+    main()
