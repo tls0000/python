@@ -1,0 +1,69 @@
+# 간단한 가계부 프로그램
+
+# 초기 잔액과 거래 내역을 저장할 리스트
+balance = 0
+transactions = []
+
+# 메뉴 출력 함수
+def show_menu():
+    print("\n가계부 프로그램")
+    print("1. 수입 추가")
+    print("2. 지출 추가")
+    print("3. 거래 내역 보기")
+    print("4. 잔액 확인")
+    print("5. 종료")
+
+# 수입 추가 함수
+def add_income():
+    global balance
+    try:
+        amount = int(input("추가할 수입 금액을 입력하세요: "))
+        balance += amount
+        transactions.append(("수입", amount))
+        print(f"{amount}원이 추가되었습니다.")
+    except ValueError:
+        print("올바른 금액을 입력하세요.")
+
+# 지출 추가 함수
+def add_expense():
+    global balance
+    try:
+        amount = int(input("추가할 지출 금액을 입력하세요: "))
+        balance -= amount
+        transactions.append(("지출", amount))
+        print(f"{amount}원이 지출되었습니다.")
+    except ValueError:
+        print("올바른 금액을 입력하세요.")
+
+# 거래 내역 보기 함수
+def show_transactions():
+    if not transactions:
+        print("거래 내역이 없습니다.")
+    else:
+        print("\n거래 내역:")
+        for idx, (t_type, amount) in enumerate(transactions, start=1):
+            print(f"{idx}. {t_type}: {amount}원")
+    print(f"현재 잔액: {balance}원")
+
+# 잔액 확인 함수
+def check_balance():
+    print(f"현재 잔액은 {balance}원입니다.")
+
+# 메인 루프
+while True:
+    show_menu()
+    choice = input("메뉴를 선택하세요: ")
+
+    if choice == '1':
+        add_income()
+    elif choice == '2':
+        add_expense()
+    elif choice == '3':
+        show_transactions()
+    elif choice == '4':
+        check_balance()
+    elif choice == '5':
+        print("프로그램을 종료합니다.")
+        break
+    else:
+        print("올바른 메뉴 번호를 선택하세요.")
