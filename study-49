@@ -1,0 +1,23 @@
+import random
+
+def reverse_words_game():
+    print("단어 뒤집기 게임에 오신 것을 환영합니다!")
+    print("문장을 입력하면 단어를 랜덤하게 뒤집습니다.")
+    print("종료하려면 '종료'를 입력하세요.")
+    
+    while True:
+        user_input = input("\n문장을 입력하세요: ")
+        
+        if user_input.strip().lower() == "종료":
+            print("게임을 종료합니다. 안녕히 가세요!")
+            break
+        
+        words = user_input.split()
+        reversed_words = [random.choice([word, word[::-1]]) for word in words]
+        result = " ".join(reversed_words)
+        
+        print("\n🎲 결과: ", result)
+        print("또 시도해보세요!")
+
+if __name__ == "__main__":
+    reverse_words_game()
