@@ -1,0 +1,89 @@
+import threading
+import time
+import os
+
+# 파일을 읽고 쓰는 클래스
+class FileProcessor:
+    def __init__(self, filename):
+        self.filename = filename
+
+    def read_file(self):
+        """파일을 읽고 데이터를 반환합니다."""
+        if not os.path.exists(self.filename):
+            raise FileNotFoundError(f"{self.filename} 파일이 존재하지 않습니다.")
+        with open(self.filename, 'r', encoding='utf-8') as file:
+            data = file.read()
+        return data
+
+    def write_file(self, data):
+        """파일에 데이터를 씁니다."""
+        with open(self.filename, 'w', encoding='utf-8') as file:
+            file.write(data)
+
+# 데이터 분석을 수행하는 클래스
+class DataAnalyzer:
+    def __init__(self, data):
+        self.data = data
+
+    def analyze(self):
+        """단순한 데이터 분석(단어의 빈도수 계산)을 수행합니다."""
+        words = self.data.split()
+        word_count = {}
+        for word in words:
+            word_count[word] = word_count.get(word, 0) + 1
+        return word_count
+
+# 결과를 처리하는 클래스
+class ResultProcessor:
+    def __init__(self, word_count):
+        self.word_count = word_count
+
+    def process_result(self):
+        """빈도수가 높은 단어를 출력합니다."""
+        sorted_words = sorted(self.word_count.items(), key=lambda x: x[1], reverse=True)
+        for word, count in sorted_words[:5]:  # 상위 5개의 단어 출력
+            print(f"단어: {word}, 빈도수: {count}")
+
+# 다중 스레드를 사용하여 처리하는 클래스
+class ThreadedFileProcessor:
+    def __init__(self, filename):
+        self.filename = filename
+        self.file_processor = FileProcessor(filename)
+        self.data_analyzer = None
+        self.result_processor = None
+
+    def process_file(self):
+        try:
+            # 파일 읽기
+            data = self.file_processor.read_file()
+            # 데이터 분석
+            self.data_analyzer = DataAnalyzer(data)
+            word_count = self.data_analyzer.analyze()
+            # 결과 처리
+            self.result_processor = ResultProcessor(word_count)
+            self.result_processor.process_result()
+        except FileNotFoundError as e:
+            print(f"오류 발생: {e}")
+        except Exception as e:
+            print(f"예상치 못한 오류 발생: {e}")
+
+# 다중 스레드로 파일 처리 작업을 병렬로 수행하는 함수
+def process_in_thread(filename):
+    processor = ThreadedFileProcessor(filename)
+    processor.process_file()
+
+if __name__ == "__main__":
+    # 스레드를 생성하여 파일 처리 작업을 병렬로 실행
+    filenames = ["file1.txt", "file2.txt", "file3.txt"]
+    threads = []
+
+    for filename in filenames:
+        thread = threading.Thread(target=process_in_thread, args=(filename,))
+        threads.append(thread)
+        thread.start()
+
+    # 모든 스레드가 작업을 마칠 때까지 기다립니다.
+    for thread in threads:
+        thread.join()
+
+    print("모든 파일 처리 완료.")
