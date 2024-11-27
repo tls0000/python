@@ -1,0 +1,26 @@
+import ctypes
+import random
+from PIL import Image, ImageDraw, ImageFont
+
+def create_image_with_text(text, output_path):
+    img = Image.new('RGB', (1920, 1080), color=(255, 255, 255))
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("arial.ttf", 60)
+    draw.text((100, 500), text, fill=(0, 0, 0), font=font)
+    img.save(output_path)
+
+def set_desktop_background(image_path):
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, image_path, 0)
+
+if __name__ == "__main__":
+    quotes = [
+        "오늘도 좋은 하루!",
+        "파이썬은 언제나 옳다.",
+        "코드 한 줄이 세상을 바꾼다.",
+        "배우는 것을 멈추지 마라!"
+    ]
+    selected_quote = random.choice(quotes)
+    image_path = "quote_background.jpg"
+    create_image_with_text(selected_quote, image_path)
+    set_desktop_background(image_path)
+    print(f"Background set with quote: {selected_quote}")
