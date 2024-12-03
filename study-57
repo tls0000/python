@@ -1,0 +1,6 @@
+def to_uppercase():
+    text = input("Enter a string: ")
+    print("Uppercase:", text.upper())
+
+if __name__ == "__main__":
+    to_uppercase()
