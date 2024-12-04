@@ -1,0 +1,7 @@
+def count_character():
+    text = input("Enter a string: ")
+    char = input("Enter the character to count: ")
+    print(f"The character '{char}' appears {text.count(char)} times.")
+
+if __name__ == "__main__":
+    count_character()
