@@ -1,0 +1,7 @@
+def string_to_binary():
+    text = input("Enter a string: ")
+    binary_result = ' '.join(format(ord(char), '08b') for char in text)
+    print("Binary representation:", binary_result)
+
+if __name__ == "__main__":
+    string_to_binary()
