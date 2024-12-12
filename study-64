@@ -1,0 +1,13 @@
+def binary_to_string():
+    binary = input("Enter binary values separated by spaces (e.g., 01001000 01100101): ")
+    try:
+        # 각 이진수를 문자로 변환하여 리스트 생성
+        chars = [chr(int(b, 2)) for b in binary.split()]
+        # 리스트를 문자열로 합치기
+        result = ''.join(chars)
+        print("Decoded string:", result)
+    except ValueError:
+        print("Invalid binary input. Please enter valid binary values.")
+
+if __name__ == "__main__":
+    binary_to_string()
